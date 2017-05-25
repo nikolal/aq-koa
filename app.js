@@ -3,7 +3,8 @@ const logger = require('koa-logger');
 const json = require('koa-json');
 const views = require('koa-views');
 const onerror = require('koa-onerror');
-
+const mongoose = require('mongoose');
+// API
 const index = require('./routes/index');
 const users = require('./routes/users');
 const locations = require('./routes/locations');
@@ -33,6 +34,15 @@ app.use(require('koa-static')(`${__dirname}/public`));
 app.use(index.routes(), index.allowedMethods());
 app.use(users.routes(), users.allowedMethods());
 app.use(locations.routes(), locations.allowedMethods());
+
+// mongoDB
+mongoose.connect('mongodb://localhost/test');
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection, ERROR'));
+db.once('open', function() {
+  console.log('MongoDB connection, SUCCEESS')
+});
 
 
 module.exports = app;
