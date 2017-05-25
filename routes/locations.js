@@ -1,6 +1,6 @@
 const router = require("koa-router")();
 
-router.prefix("/nm/api/locations");
+router.prefix("/locations");
 
 router.get('/', function *(next) {
 
