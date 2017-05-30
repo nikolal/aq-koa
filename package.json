@@ -1,28 +1,51 @@
 {
-  "name": "aq-server",
-  "version": "0.1.0",
-  "private": true,
+  "name": "qa-server",
+  "description": "qa app",
+  "version": "1.0.0",
+  "author": "Nikola Lukic",
+  "repository": {
+    "url": "https://github.com/nikolal/aq-server.git"
+  },
+  "license": "MIT",
+  "main": "server/index.js",
   "scripts": {
-    "start": "node bin/www",
-    "dev": "./node_modules/.bin/nodemon bin/www",
-    "prd": "pm2 start bin/www",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server/ --exec babel-node",
+    "build": "babel server -d dist",
+    "lint": "eslint ./server",
+    "test": "npm run lint && npm run mocha",
+    "prod": "npm run build && node dist/",
+    "mocha": "./node_modules/.bin/mocha --compilers js:babel-register --require babel-polyfill"
   },
   "dependencies": {
-    "co": "^4.6.0",
-    "debug": "^2.6.3",
-    "jade": "~1.11.0",
-    "koa": "^1.4.0",
-    "koa-bodyparser": "^2.5.0",
-    "koa-json": "^1.1.3",
-    "koa-logger": "^1.3.1",
-    "koa-onerror": "^1.3.1",
-    "koa-router": "^5.4.0",
-    "koa-static": "^1.5.2",
-    "koa-views": "^3.1.0",
-    "mongoose": "^4.10.2"
+    "babel-polyfill": "^6.5.0",
+    "glob": "^7.1.1",
+    "jsonwebtoken": "^7.2.1",
+    "koa": "^2.0.0-alpha.7",
+    "koa-bodyparser": "^3.0.0",
+    "koa-helmet": "^2.0.0",
+    "koa-jwt": "^2.1.0",
+    "koa-logger": "^2.0.0",
+    "koa-passport": "^3.0.0",
+    "koa-router": "^7.0.0",
+    "koa-session": "^5.0.0",
+    "mongoose": "^4.4.3",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.8.1"
+    "babel-cli": "^6.5.1",
+    "babel-eslint": "^7.1.1",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-syntax-async-functions": "^6.5.0",
+    "babel-plugin-transform-async-to-generator": "^6.5.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-register": "^6.3.13",
+    "chai": "^3.5.0",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "mocha": "^3.2.0",
+    "nodemon": "^1.8.1",
+    "should": "^11.1.2",
+    "supertest": "^2.0.1"
   }
 }
