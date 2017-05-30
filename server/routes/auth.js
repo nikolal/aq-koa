@@ -2,17 +2,16 @@ import 'babel-polyfill'
 import Router from 'koa-router'
 import { baseApi } from '../config'
 import authenticate from '../middlewares/authenticate'
+import UserControllers from '../controllers/userController'
 
 const api = 'auth'
 const router = new Router()
-
-// console.log(register)
 
 router.prefix(`/${baseApi}/${api}`)
 
 router.post('/', authenticate)
 
-// router.post('/login', login)
+router.post('/register', UserControllers.add)
 
 
 // // POST /api/cities
